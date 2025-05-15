@@ -3,10 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { LuSparkles } from 'react-icons/lu';
 import HERO_IMG from '../../assets/HERO_IMG.png';
 import { APP_FEATURES } from '../../utlis/data';
+import { set } from 'zod';
+import Modal from '../../components/Modal';
+import Login from '../Auth/Login';
+import SignUp from '../Auth/SignUp';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState("login"); // <-- Add this line
 
   const handleCTA = () => {
     // You can navigate or trigger actions here
@@ -16,7 +21,7 @@ const LandingPage = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="w-full min-h-full bg-[#FFFCEF] pb-36">
+      <div className="w-full min-h-full bg-[#FFFCEF] pb-36 overflow x-hidden">
         <div className="w-[500px] h-[500px] bg-amber-200/20 blur-[65px] absolute top-0 left-0" />
         <div className="container mx-auto px-4 pt-6 pb-[200px] relative z-10">
           <header className="flex justify-between items-center mb-16">
@@ -65,7 +70,7 @@ const LandingPage = () => {
 
       {/* Hero Image Section */}
       <div className="w-full min-h-full relative z-10 mb-86 ">
-        <section className="flex items-center justify-center -mt-36">
+        <section className="flex items-center justify-center -mt-76">
           <img src={HERO_IMG} alt="Hero" className="w-[80vw] rounded-lg" />
         </section>
 
@@ -110,6 +115,25 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={openAuthModal}
+        onClose={()=>{
+          setOpenAuthModal(false);
+          setCurrentPage("login");
+        }}
+        hideHeader
+      >
+      <div>
+      {currentPage === "login" && (
+        <Login setCurrentPage ={setCurrentPage} />
+      )}
+          {currentPage === "signup" && (
+            <SignUp setCurrentPage={setCurrentPage} />
+          )}
+      </div>
+      
+      </Modal>
+
     </>
   );
 };
