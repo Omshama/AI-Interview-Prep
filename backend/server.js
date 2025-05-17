@@ -6,8 +6,9 @@ const connectDB=require('./config/db');
 const authRoute=require('./routes/authRoute');
 const questionRoute= require('./routes/questionRoute');
 const sessionRoute=require('./routes/sessionRoute');
-
+const{generateConceptExplanation,generateInterviewQuestions}=require('./controllers/aiController');
 const app=express();
+const {protect} = require('./middlewares/authMiddleware');
 
 //Middleware to handle CORS
 app.use(
@@ -23,11 +24,11 @@ app.use(express.json());
 
 //Routes
 app.use("/api/auth",authRoute);
-// app.use("/api/question",questionRoute);
-// app.use("/api/session",sessionRoute);
+app.use("/api/question",questionRoute);
+app.use("/api/session",sessionRoute);
 
-// app.use('/api/ai/generate-questions',protect,generateInterviewQuestions);
-// app.use('/api/ai/generate-explanation',protect,generateConceptExplanation);
+app.use('/api/ai/generate-questions',protect,generateInterviewQuestions);
+app.use('/api/ai/generate-explanation',protect,generateConceptExplanation);
 //Serve Uploads Folder 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
