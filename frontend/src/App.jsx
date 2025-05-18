@@ -6,8 +6,10 @@ import SignUp from './Pages/Auth/SignUp';
 import Home from'./Pages/Home/Dashboard';
 import LandingPage from './Pages/InterviewPrep/LandingPage';
 import InterviewPrep from './Pages/InterviewPrep/InterviewPrep';
+import UserProvider from './context/userContext';
 const App = () => {
   return (
+    <UserProvider>
     <div className=''>
       <Router>
         <Routes>
@@ -29,6 +31,7 @@ const App = () => {
       
       />
     </div>
+    </UserProvider>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuSparkles } from 'react-icons/lu';
 import HERO_IMG from '../../assets/HERO_IMG.png';
@@ -7,13 +7,25 @@ import { set } from 'zod';
 import Modal from '../../components/Modal';
 import Login from '../Auth/Login';
 import SignUp from '../Auth/SignUp';
+import { UserContext } from '../../context/userContext';
+import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+import ProfileInfoCard from '../../components/ProfileInfoCard';
 
 const LandingPage = () => {
+  const {user}= useContext(UserContext);
   const navigate = useNavigate();
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login"); // <-- Add this line
 
   const handleCTA = () => {
+    if(!user)
+    {
+      setOpenAuthModal(true);
+
+    }
+    else{
+      navigate ("/dashboard");
+    }
     // You can navigate or trigger actions here
     console.log('CTA clicked');
   };
@@ -26,12 +38,13 @@ const LandingPage = () => {
         <div className="container mx-auto px-4 pt-6 pb-[200px] relative z-10">
           <header className="flex justify-between items-center mb-16">
             <div className="text-xl text-black font-bold">Interview Prep AI</div>
-            <button
+            {user?(<ProfileInfoCard/>  ):(
+              <button
               className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white transition-colors cursor-pointer"
               onClick={() => setOpenAuthModal(true)}
             >
               Login / Sign Up
-            </button>
+            </button>)}
           </header>
 
           <div className="flex flex-col md:flex-row items-center">
