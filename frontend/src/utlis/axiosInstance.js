@@ -14,16 +14,14 @@ const axiosInstance=axios.create({
 
 //Request Interceptor 
 axiosInstance.interceptors.request.use(
-    (config)=>{
-        const accessToken = localStorage.getItem('token');
-        if(accessToken){
-            config.headers.Authorization=`Bearer${accessToken}`;
-        }
-        return config;
-    },
-    (error)=>{
-        return Promise.reject(error);
+  (config) => {
+    const accessToken = localStorage.getItem('token');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
+    return config;
+  },
+  (error) => Promise.reject(error)
 );
 //Response Interceptor 
 axiosInstance.interceptors.response.use(
