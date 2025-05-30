@@ -10,6 +10,8 @@ import axiosInstance from '../../utlis/axiosInstance';
 import { API_PATHS } from '../../utlis/apiPath';
 import SummaryCard from '../../components/Cards/SummaryCard';
 import moment from "moment";
+import Modal from '../../components/Modal';
+import CreateSessionForm from'./CreateSessionForm';
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -20,17 +22,16 @@ const Dashboard = () => {
     data: null,
   });
 
-  const fetchAllSessions = async () => {
-   try{
+ const fetchAllSessions = async () => {
+  try {
     const response = await axiosInstance.get(API_PATHS.SESSION.GET_ALL);
-    setSessions(response.data);
+    console.log("Session response:", response.data); // ✅ good to keep during dev
+    setSessions(response.data.sessions); // ✅ FIXED
+  } catch (error) {
+    console.error("Error Fetching Session Data", error);
+  }
+};
 
-   }
-   catch(error)
-   {
-    console.error("Error Fetching Session Data",error);
-   }
-  };
 
   const deleteSession = async (sessionData) => {
     // placeholder for future logic
@@ -50,8 +51,8 @@ const Dashboard = () => {
       key={data?._id}
       colors={CARD_BG[index % CARD_BG.length]}
       role={data?.role || ""}
-      topicToFocus={data?.topicToFocus || ""}
-      exprience={data?.exprience || "-"}
+      topicToFocus={data?.topicsToFocus || []}
+      exprience={data?.experience || "-"}
       questions={data?.questions?.length || "-"}
       description={data?.description || ""}
       lastupdated={
@@ -69,6 +70,16 @@ const Dashboard = () => {
           </button>
         
       </div>
+      <Modal isOpen={openCreateModal} onClose={()=>{
+        setOpenCreateModal(false);
+
+        }}
+        hideHeader
+      >
+      <div>
+        <CreateSessionForm/>
+      </div>
+      </Modal>
     </DashboardLayout>
   );
 };
