@@ -1,3 +1,63 @@
+# 🧠 AI Interview Prep
+
+🚀 [Live Demo →](https://ai-interview-prep-gamma-six.vercel.app/)
+
+**AI Interview Prep** is a full-stack web app designed to help developers prepare for software engineering interviews. It uses AI (Google Gemini) to generate intelligent Q&A tailored for frontend, backend, and full-stack roles.
+
+---
+
+## ✨ Features
+
+- 🤖 **AI-Powered Q&A**  
+  Role-specific interview questions and answers with Google Gemini.
+
+- 🧠 **Concept Deep-Dives**  
+  Expand answers to understand core concepts and reasoning.
+
+- 📚 **Personalized Learning**  
+  Filter by frontend, backend, and full-stack roles.
+
+- 🗂 **Bookmark & Save**  
+  Save important questions for review.
+
+- 💬 **Clean, Responsive UI**  
+  Built with React 19, Tailwind CSS, and Vite.
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+- React 19, Vite, Tailwind CSS
+- Axios, Framer Motion, React Router
+
+### Backend
+- Node.js, Express 5
+- MongoDB + Mongoose
+- Google Gemini AI via `@google/generative-ai`
+
+---
+
+## 🛠️ Getting Started
+
+Follow the instructions below to set up the project locally.
+
+---
+
+### ⚙️ Prerequisites
+
+- Node.js (v18 or later)
+- MongoDB (local or MongoDB Atlas)
+- Google Gemini API Key (get it from [MakerSuite](https://makersuite.google.com/app/apikey))
+
+---
+
+## 📦 Clone the Repository
+
+```bash
+git clone https://github.com/your-username/ai-interview-prep.git
+cd ai-interview-prep
+
 🧾 Backend Setup
 bash
 Copy
